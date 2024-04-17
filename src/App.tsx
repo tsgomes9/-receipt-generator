@@ -119,6 +119,8 @@ function App() {
             variant="outlined"
             size="small"
             type="date"
+            label="Data"
+            InputLabelProps={{ shrink: true }}
             sx={{ width: "100%" }}
             onChange={(e) => setDate(e.target.value)}
           />
