@@ -4,6 +4,7 @@ import FormatDate from "./utils/FormatDate";
 import NumberToText from "./utils/NumberText";
 import SelectPayType from "./utils/SelectPayType";
 import NumberGenerator from "./utils/NumberGenerator";
+import FormatCPF from "./utils/FormatCPF";
 
 interface PDFProps {
   value: number;
@@ -87,7 +88,7 @@ const PDFGenerator: React.FC<PDFProps> = ({
       {cpf && (
         <View style={styles.section}>
           <Text style={styles.label}>CPF ou CNPJ (Cliente):</Text>
-          <Text style={[styles.content, styles.border]}>{cpf}</Text>
+          <Text style={[styles.content, styles.border]}>{FormatCPF(cpf)}</Text>
         </View>
       )}
       <View style={styles.section}>
@@ -97,7 +98,9 @@ const PDFGenerator: React.FC<PDFProps> = ({
       {cpfSender && (
         <View style={styles.section}>
           <Text style={styles.label}>CPF ou CNPJ (Emissor):</Text>
-          <Text style={[styles.content, styles.border]}>{cpfSender}</Text>
+          <Text style={[styles.content, styles.border]}>
+            {FormatCPF(cpfSender)}
+          </Text>
         </View>
       )}
       <View style={styles.section}>
