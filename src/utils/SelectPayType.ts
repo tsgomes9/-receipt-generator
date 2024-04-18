@@ -7,6 +7,6 @@ export default function SelectPayType(payType: number): string {
       case 3:
         return 'Cartão';
       default:
-        return 'Forma de pagamento não especificada';
+        return 'Dinheiro';
     }
   }

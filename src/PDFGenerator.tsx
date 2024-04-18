@@ -106,7 +106,7 @@ const PDFGenerator: React.FC<PDFProps> = ({
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.label}>Tipo de Pagamento:</Text>
+        <Text style={styles.label}>Forma de Pagamento:</Text>
         <Text style={[styles.content, styles.border]}>
           {SelectPayType(payType)}
         </Text>
