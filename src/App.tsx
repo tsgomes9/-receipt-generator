@@ -12,10 +12,6 @@ import PDFGenerator from "./PDFGenerator";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { z } from "zod";
 
-const schema = z.object({
-  value: z.string().min(1, "Este campo não pode ser vazio"),
-});
-
 function App() {
   const [client, setClient] = useState<string>();
   const [value, setValue] = useState<number>(0);
