@@ -48,6 +48,7 @@ function App() {
             label="Valor"
             variant="outlined"
             size="small"
+            type="number"
             sx={{ width: "100%" }}
             onChange={(e) => setValue(Number(e.target.value))}
           />
