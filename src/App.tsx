@@ -10,7 +10,6 @@ import {
 import { FormContainer } from "./styles/form-style";
 import PDFGenerator from "./PDFGenerator";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { z } from "zod";
 
 function App() {
   const [client, setClient] = useState<string>();
