@@ -175,7 +175,11 @@ function App() {
                 fileName="recibo.pdf"
               >
                 {({ loading }) =>
-                  loading ? "Carregando documento..." : "Baixar PDF"
+                  loading ? (
+                    "Carregando documento..."
+                  ) : (
+                    <Button variant="outlined">Baixar Arquivo PDF</Button>
+                  )
                 }
               </PDFDownloadLink>
             </div>
