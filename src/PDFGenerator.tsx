@@ -5,18 +5,7 @@ import NumberToText from "./utils/NumberText";
 import SelectPayType from "./utils/SelectPayType";
 import NumberGenerator from "./utils/NumberGenerator";
 import FormatCPF from "./utils/FormatCPF";
-
-interface PDFProps {
-  value: number;
-  client?: string;
-  cpf?: string;
-  sender?: string;
-  product?: string;
-  city?: string;
-  date: string;
-  payType: number;
-  cpfSender?: string;
-}
+import { PDFProps } from "./types/PDFProps";
 
 const styles = StyleSheet.create({
   page: {
@@ -27,8 +16,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 10,
+    fontSize: 32,
     fontWeight: "bold",
   },
   label: {
@@ -40,21 +28,33 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 10,
   },
-  border: {
-    padding: 5,
-    backgroundColor: "#d8daeb",
-  },
+
   date: {
-    marginTop: "30px",
-    fontSize: "12px",
+    marginTop: "16px",
+    fontSize: "16px",
     fontWeight: "bold",
-    margin: "auto",
+    textAlign: "center",
   },
   number: {
     fontSize: "11px",
     color: "#9695ab",
     fontWeight: "bold",
     marginBottom: "24px",
+  },
+  inputField: {
+    border: "1px solid grey",
+    borderRadius: "4px",
+    width: "35%",
+    display: "flex",
+    flexDirection: "row",
+    gap: "10px",
+    padding: "4px",
+  },
+  inputFieldFullWidth: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    marginTop: "12px",
   },
 });
 
@@ -71,53 +71,67 @@ const PDFGenerator: React.FC<PDFProps> = ({
 }) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
-        <Text style={styles.title}>Recibo</Text>
-        <Text style={styles.number}>Nº {NumberGenerator()}</Text>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Valor:</Text>
-        <Text style={[styles.content, styles.border]}>
-          R$ {value} ({NumberToText(value)} reais)
-        </Text>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Cliente:</Text>
-        <Text style={[styles.content, styles.border]}>{client}</Text>
-      </View>
-      {cpf && (
-        <View style={styles.section}>
-          <Text style={styles.label}>CPF ou CNPJ (Cliente):</Text>
-          <Text style={[styles.content, styles.border]}>{FormatCPF(cpf)}</Text>
-        </View>
-      )}
-      <View style={styles.section}>
-        <Text style={styles.label}>Emissor:</Text>
-        <Text style={[styles.content, styles.border]}>{sender}</Text>
-      </View>
-      {cpfSender && (
-        <View style={styles.section}>
-          <Text style={styles.label}>CPF ou CNPJ (Emissor):</Text>
-          <Text style={[styles.content, styles.border]}>
-            {FormatCPF(cpfSender)}
+      <div
+        style={{
+          border: "1px solid grey",
+          padding: "10px",
+          borderRadius: "5px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text style={styles.title}>RECIBO</Text>
+
+          <div style={styles.inputField}>
+            <Text style={{ fontSize: "9px" }}>Nº</Text>
+            <Text>{NumberGenerator()}</Text>
+          </div>
+
+          <div style={styles.inputField}>
+            <Text style={{ fontSize: "9px" }}>VALOR</Text>
+            <Text>R$ {value}</Text>
+          </div>
+        </div>
+
+        <View style={[styles.inputField, styles.inputFieldFullWidth]}>
+          <Text style={{ fontSize: "9px" }}>RECEBI(EMOS) DE</Text>
+          <Text>
+            {client} {cpf && " -  CPF/CNPJ: " + FormatCPF(cpf)}
           </Text>
         </View>
-      )}
-      <View style={styles.section}>
-        <Text style={styles.label}>Referente à:</Text>
-        <Text style={[styles.content, styles.border]}>{product}</Text>
-      </View>
 
-      <View style={styles.section}>
-        <Text style={styles.label}>Forma de Pagamento:</Text>
-        <Text style={[styles.content, styles.border]}>
-          {SelectPayType(payType)}
+        <View style={[styles.inputField, styles.inputFieldFullWidth]}>
+          <Text style={{ fontSize: "9px" }}>A IMPORTÂNCIA DE</Text>
+          <Text>{NumberToText(value)} reais</Text>
+        </View>
+
+        <View style={[styles.inputField, styles.inputFieldFullWidth]}>
+          <Text style={{ fontSize: "9px" }}>REFERENTE À</Text>
+          <Text>{product}</Text>
+        </View>
+
+        <View style={[styles.inputField, styles.inputFieldFullWidth]}>
+          <Text style={{ fontSize: "9px" }}>FORMA DE PAGAMENTO</Text>
+          <Text>{SelectPayType(payType)}</Text>
+        </View>
+
+        <View style={[styles.inputField, styles.inputFieldFullWidth]}>
+          <Text style={{ fontSize: "9px" }}>EMITENTE</Text>
+          <Text>
+            {sender} {cpfSender && " -  CPF/CNPJ: " + FormatCPF(cpfSender)}
+          </Text>
+        </View>
+
+        <Text style={styles.date}>
+          {city}, {FormatDate(date)}
         </Text>
-      </View>
-
-      <Text style={styles.date}>
-        {city}, {FormatDate(date)}
-      </Text>
+      </div>
     </Page>
   </Document>
 );
