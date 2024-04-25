@@ -5,7 +5,7 @@ export default function SelectPayType(payType: number): string {
       case 2:
         return 'Pix';
       case 3:
-        return 'Cartão';
+        return 'Cartão de Crédito';
       default:
         return 'Dinheiro';
     }

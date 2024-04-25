@@ -6,5 +6,5 @@ export const FormContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 95vh
+    height: 85vh
 `

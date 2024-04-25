@@ -1,11 +1,11 @@
 import React from "react";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
-import FormatDate from "./utils/FormatDate";
-import NumberToText from "./utils/NumberText";
-import SelectPayType from "./utils/SelectPayType";
-import NumberGenerator from "./utils/NumberGenerator";
-import FormatCPF from "./utils/FormatCPF";
-import { PDFProps } from "./types/PDFProps";
+import FormatDate from "../../utils/FormatDate";
+import NumberToText from "../../utils/NumberText";
+import SelectPayType from "../../utils/SelectPayType";
+import NumberGenerator from "../../utils/NumberGenerator";
+import FormatCPF from "../../utils/FormatCPF";
+import { PDFProps } from "../../types/PDFProps";
 
 const styles = StyleSheet.create({
   page: {
@@ -68,6 +68,7 @@ const PDFGenerator: React.FC<PDFProps> = ({
   date,
   payType,
   cpfSender,
+  signature,
 }) => (
   <Document>
     <Page size="A4" style={styles.page}>
@@ -127,6 +128,29 @@ const PDFGenerator: React.FC<PDFProps> = ({
             {sender} {cpfSender && " -  CPF/CNPJ: " + FormatCPF(cpfSender)}
           </Text>
         </View>
+
+        {signature === "signature" && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              margin: "auto",
+              marginTop: "55px",
+            }}
+          >
+            <div
+              style={{ borderBottom: "1px solid black", width: "250px" }}
+            ></div>
+
+            <Text
+              style={{ margin: "auto", fontSize: "11px", marginTop: "12px" }}
+            >
+              {" "}
+              {sender}
+            </Text>
+          </div>
+        )}
 
         <Text style={styles.date}>
           {city}, {FormatDate(date)}

@@ -8,4 +8,5 @@ export interface PDFProps {
     date: string;
     payType: number;
     cpfSender?: string;
+    signature: string
   }
