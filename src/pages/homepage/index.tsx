@@ -1,6 +1,5 @@
-import React from "react";
-import { Button, Link, Typography } from "@mui/material";
-import { Link as LinkRouter, Outlet, useNavigate } from "react-router-dom";
+import { Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { linkList } from "./home-list-links";
 
 export default function Homepage() {
