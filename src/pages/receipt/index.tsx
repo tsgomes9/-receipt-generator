@@ -40,7 +40,7 @@ export default function Receipt() {
   };
   return (
     <FormContainer>
-      <Typography variant="h4" fontWeight={"bold"}>
+      <Typography variant="h4" fontWeight={"bold"} m={0}>
         Recibo
       </Typography>
       <form onSubmit={handleGeneratePDF}>
@@ -50,7 +50,6 @@ export default function Receipt() {
             flexDirection: "column",
             gap: 2,
             p: 2,
-            height: "70vh",
           }}
         >
           <div>
@@ -184,7 +183,15 @@ export default function Receipt() {
           <div
             style={{ display: "flex", justifyContent: "space-between", gap: 5 }}
           >
-            <Button variant="contained" type="submit" fullWidth>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "black",
+                "&:hover": { backgroundColor: "#34353b" },
+              }}
+              type="submit"
+              fullWidth
+            >
               Gerar PDF
             </Button>
 
@@ -192,6 +199,7 @@ export default function Receipt() {
               variant="outlined"
               type="submit"
               fullWidth
+              color="warning"
               onClick={() => navigate("../")}
             >
               Cancelar
