@@ -199,7 +199,7 @@ export default function Receipt() {
               variant="outlined"
               type="submit"
               fullWidth
-              color="warning"
+              color="error"
               onClick={() => navigate("../")}
             >
               Cancelar
